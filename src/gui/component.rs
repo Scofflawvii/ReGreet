@@ -138,8 +138,7 @@ impl AsyncComponent for Greeter {
                 },
                 #[template_child]
                 session_label {
-                    #[track(model.updates.changed(Updates::input_mode()))]
-                    set_visible: !model.updates.is_input(),
+                    set_visible: true,
                 },
                 #[template_child]
                 usernames_box {
@@ -167,7 +166,7 @@ impl AsyncComponent for Greeter {
                         model.updates.changed(Updates::manual_user_mode())
                         || model.updates.changed(Updates::input_mode())
                     )]
-                    set_sensitive: model.updates.manual_user_mode && !model.updates.is_input(),
+                    set_sensitive: model.updates.manual_user_mode,
                     #[track(model.updates.changed(Updates::manual_user_mode()))]
                     set_visible: model.updates.manual_user_mode,
                 },
@@ -177,7 +176,9 @@ impl AsyncComponent for Greeter {
                         model.updates.changed(Updates::manual_sess_mode())
                         || model.updates.changed(Updates::input_mode())
                     )]
-                    set_visible: !model.updates.manual_sess_mode && !model.updates.is_input(),
+                    set_visible: !model.updates.manual_sess_mode,
+                    #[track(model.updates.changed(Updates::input_mode()))]
+                    set_sensitive: !model.updates.is_input(),
                     #[track(model.updates.changed(Updates::active_session_id()))]
                     set_active_id: model.updates.active_session_id.as_deref(),
                 },

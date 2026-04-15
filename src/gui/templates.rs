@@ -116,25 +116,25 @@ impl WidgetTemplate for Ui {
                     /// Label for the password widget
                     #[name = "input_label"]
                     #[template]
-                    attach[0, 2, 1, 1] = &EntryLabel {
+                    attach[0, 3, 1, 1] = &EntryLabel {
                         set_height_request: 45,
                     },
 
                     /// Widget where the user enters a secret
                     #[name = "secret_entry"]
-                    attach[1, 2, 1, 1] = &gtk::PasswordEntry {
+                    attach[1, 3, 1, 1] = &gtk::PasswordEntry {
                         set_show_peek_icon: true,
                         add_css_class: "flat-field",
                     },
 
                     /// Widget where the user enters something visible
                     #[name = "visible_entry"]
-                    attach[1, 2, 1, 1] = &gtk::Entry {
+                    attach[1, 3, 1, 1] = &gtk::Entry {
                         add_css_class: "flat-field",
                     },
 
                     /// Collection of action buttons (eg. Login)
-                    attach[1, 3, 1, 1] = &gtk::Box {
+                    attach[1, 4, 1, 1] = &gtk::Box {
                         add_css_class: "action-row",
                         set_halign: gtk::Align::End,
                         set_spacing: 15,

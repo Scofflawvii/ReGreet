@@ -104,7 +104,7 @@ impl Greeter {
             error: None,
             input: String::new(),
             manual_user_mode: true,
-            manual_sess_mode: true,
+            manual_sess_mode: false,
             input_mode: InputMode::None,
             input_prompt: String::new(),
             active_session_id: None,
