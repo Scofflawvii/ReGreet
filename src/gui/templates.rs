@@ -133,24 +133,8 @@ impl WidgetTemplate for Ui {
                         add_css_class: "flat-field",
                     },
 
-                    /// Button to toggle manual user entry
-                    #[name = "user_toggle"]
-                    attach[2, 1, 1, 1] = &gtk::ToggleButton {
-                        set_icon_name: "document-edit-symbolic",
-                        set_tooltip_text: Some("Manually enter username"),
-                        add_css_class: "mode-toggle",
-                    },
-
-                    /// Button to toggle manual session entry
-                    #[name = "sess_toggle"]
-                    attach[2, 2, 1, 1] = &gtk::ToggleButton {
-                        set_icon_name: "document-edit-symbolic",
-                        set_tooltip_text: Some("Manually enter session command"),
-                        add_css_class: "mode-toggle",
-                    },
-
                     /// Collection of action buttons (eg. Login)
-                    attach[1, 3, 2, 1] = &gtk::Box {
+                    attach[1, 3, 1, 1] = &gtk::Box {
                         add_css_class: "action-row",
                         set_halign: gtk::Align::End,
                         set_spacing: 15,

@@ -249,18 +249,6 @@ impl AsyncComponent for Greeter {
                     }
                 },
                 #[template_child]
-                user_toggle {
-                    #[track(model.updates.changed(Updates::input_mode()))]
-                    set_sensitive: !model.updates.is_input(),
-                    connect_clicked => Self::Input::ToggleManualUser,
-                },
-                #[template_child]
-                sess_toggle {
-                    #[track(model.updates.changed(Updates::input_mode()))]
-                    set_visible: !model.updates.is_input(),
-                    connect_clicked => Self::Input::ToggleManualSess,
-                },
-                #[template_child]
                 cancel_button {
                     #[track(model.updates.changed(Updates::input_mode()))]
                     set_visible: model.updates.is_input(),
@@ -372,6 +360,19 @@ impl AsyncComponent for Greeter {
         setup_settings(&model, &root);
         setup_users_sessions(&model, &widgets);
 
+        if let Some(username) = widgets.ui.usernames_box.active_id() {
+            widgets.ui.username_entry.set_text(&username);
+        }
+
+        widgets.ui.session_entry.set_text(
+            widgets
+                .ui
+                .sessions_box
+                .active_id()
+                .as_deref()
+                .unwrap_or("labwc"),
+        );
+
         if input.css_path.exists() {
             debug!("Loading custom CSS from file: {}", input.css_path.display());
             let provider = gtk::CssProvider::new();
@@ -410,12 +411,6 @@ impl AsyncComponent for Greeter {
                 self.sess_info = Some(info);
                 self.user_change_handler();
             }
-            Self::Input::ToggleManualUser => self
-                .updates
-                .set_manual_user_mode(!self.updates.manual_user_mode),
-            Self::Input::ToggleManualSess => self
-                .updates
-                .set_manual_sess_mode(!self.updates.manual_sess_mode),
             Self::Input::Reboot => self.reboot_click_handler(&sender),
             Self::Input::PowerOff => self.poweroff_click_handler(&sender),
         }

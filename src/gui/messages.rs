@@ -52,10 +52,6 @@ pub enum InputMsg {
     Cancel,
     /// The current user was changed in the GUI.
     UserChanged(UserSessInfo),
-    /// Toggle manual entry of user.
-    ToggleManualUser,
-    /// Toggle manual entry of session.
-    ToggleManualSess,
     Reboot,
     PowerOff,
 }
