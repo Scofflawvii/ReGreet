@@ -14,7 +14,7 @@ impl WidgetTemplate for EndButton {
     view! {
         gtk::Button {
             set_focusable: true,
-            add_css_class: "destructive-action",
+            add_css_class: "power-action",
         }
     }
 }
@@ -26,6 +26,7 @@ impl WidgetTemplate for EntryLabel {
         gtk::Label {
             set_width_request: 100,
             set_xalign: 1.0,
+            add_css_class: "entry-label",
         }
     }
 }
@@ -43,9 +44,10 @@ impl WidgetTemplate for Ui {
             add_overlay = &gtk::Frame {
                 set_halign: gtk::Align::Center,
                 set_valign: gtk::Align::Center,
-                add_css_class: "background",
+                add_css_class: "login-panel",
 
                 gtk::Grid {
+                    add_css_class: "login-grid",
                     set_column_spacing: 15,
                     set_margin_bottom: 15,
                     set_margin_end: 15,
@@ -57,6 +59,7 @@ impl WidgetTemplate for Ui {
                     /// Widget to display messages to the user
                     #[name = "message_label"]
                     attach[0, 0, 3, 1] = &gtk::Label {
+                        add_css_class: "message-label",
                         set_margin_bottom: 15,
 
                         // Format all messages in boldface.
@@ -86,19 +89,29 @@ impl WidgetTemplate for Ui {
 
                     /// Widget containing the usernames
                     #[name = "usernames_box"]
-                    attach[1, 1, 1, 1] = &gtk::ComboBoxText { set_hexpand: true },
+                    attach[1, 1, 1, 1] = &gtk::ComboBoxText {
+                        set_hexpand: true,
+                        add_css_class: "flat-field",
+                    },
 
                     /// Widget where the user enters the username
                     #[name = "username_entry"]
-                    attach[1, 1, 1, 1] = &gtk::Entry { set_hexpand: true },
+                    attach[1, 1, 1, 1] = &gtk::Entry {
+                        set_hexpand: true,
+                        add_css_class: "flat-field",
+                    },
 
                     /// Widget containing the sessions
                     #[name = "sessions_box"]
-                    attach[1, 2, 1, 1] = &gtk::ComboBoxText,
+                    attach[1, 2, 1, 1] = &gtk::ComboBoxText {
+                        add_css_class: "flat-field",
+                    },
 
                     /// Widget where the user enters the session
                     #[name = "session_entry"]
-                    attach[1, 2, 1, 1] = &gtk::Entry,
+                    attach[1, 2, 1, 1] = &gtk::Entry {
+                        add_css_class: "flat-field",
+                    },
 
                     /// Label for the password widget
                     #[name = "input_label"]
@@ -109,17 +122,23 @@ impl WidgetTemplate for Ui {
 
                     /// Widget where the user enters a secret
                     #[name = "secret_entry"]
-                    attach[1, 2, 1, 1] = &gtk::PasswordEntry { set_show_peek_icon: true },
+                    attach[1, 2, 1, 1] = &gtk::PasswordEntry {
+                        set_show_peek_icon: true,
+                        add_css_class: "flat-field",
+                    },
 
                     /// Widget where the user enters something visible
                     #[name = "visible_entry"]
-                    attach[1, 2, 1, 1] = &gtk::Entry,
+                    attach[1, 2, 1, 1] = &gtk::Entry {
+                        add_css_class: "flat-field",
+                    },
 
                     /// Button to toggle manual user entry
                     #[name = "user_toggle"]
                     attach[2, 1, 1, 1] = &gtk::ToggleButton {
                         set_icon_name: "document-edit-symbolic",
                         set_tooltip_text: Some("Manually enter username"),
+                        add_css_class: "mode-toggle",
                     },
 
                     /// Button to toggle manual session entry
@@ -127,10 +146,12 @@ impl WidgetTemplate for Ui {
                     attach[2, 2, 1, 1] = &gtk::ToggleButton {
                         set_icon_name: "document-edit-symbolic",
                         set_tooltip_text: Some("Manually enter session command"),
+                        add_css_class: "mode-toggle",
                     },
 
                     /// Collection of action buttons (eg. Login)
                     attach[1, 3, 2, 1] = &gtk::Box {
+                        add_css_class: "action-row",
                         set_halign: gtk::Align::End,
                         set_spacing: 15,
 
@@ -139,6 +160,7 @@ impl WidgetTemplate for Ui {
                         gtk::Button {
                             set_focusable: true,
                             set_label: "Cancel",
+                            add_css_class: "flat-button",
                         },
 
                         /// Button to enter the password and login
@@ -147,7 +169,7 @@ impl WidgetTemplate for Ui {
                             set_focusable: true,
                             set_label: "Login",
                             set_receives_default: true,
-                            add_css_class: "suggested-action",
+                            add_css_class: "primary-action",
                         },
                     },
                 },
@@ -159,7 +181,7 @@ impl WidgetTemplate for Ui {
                 set_halign: gtk::Align::Center,
                 set_valign: gtk::Align::Start,
 
-                add_css_class: "background",
+                add_css_class: "clock-panel",
 
                 // Make it fit cleanly onto the top edge of the screen.
                 inline_css: "
@@ -178,6 +200,7 @@ impl WidgetTemplate for Ui {
                 set_spacing: 15,
 
                 gtk::Frame {
+                    add_css_class: "error-panel",
                     /// Notification bar for error messages
                     #[name = "error_info"]
                     gtk::InfoBar {
@@ -201,6 +224,7 @@ impl WidgetTemplate for Ui {
 
                 /// Collection of buttons that close the greeter (eg. Reboot)
                 gtk::Box {
+                    add_css_class: "power-row",
                     set_halign: gtk::Align::Center,
                     set_homogeneous: true,
                     set_spacing: 15,
